@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath coursereview coursereview.wsgi --log-file -
+web: gunicorn coursereview.wsgi --log-file -
