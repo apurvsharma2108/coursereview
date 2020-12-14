@@ -23,7 +23,6 @@ font-size: 18px;
 }
 body{
   background-color:#98e9bc;
-  background-image: url('{% static "img/15.jpg"%}');
   font-family: 'Baloo Bhaina 2', cursive;
   /* margin: 0;
   padding: 0; */
