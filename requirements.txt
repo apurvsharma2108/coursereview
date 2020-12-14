@@ -4,6 +4,6 @@ dj-static==0.0.6
 gunicorn==19.9.0
 Pillow==3.3.0
 psycopg2-binary==2.7.7
-whitenoise==7.0.0
+whitenoise==5.2.0
 django_ckeditor
 django-crispy-forms
