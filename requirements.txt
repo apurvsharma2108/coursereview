@@ -1,0 +1,9 @@
+Django==3.0.8
+dj-database-url==0.5.0
+dj-static==0.0.6
+gunicorn==19.9.0
+Pillow==3.3.0
+psycopg2-binary==2.7.7
+whitenoise==7.0.0
+django_ckeditor
+django-crispy-forms
