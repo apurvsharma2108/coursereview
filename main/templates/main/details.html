@@ -1,0 +1,163 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+{% block content %}
+
+
+<body >   
+  <div class="container" style="background-image: url({% static 'img/28.jpg' %});" >
+    <br>
+    <div class="card" style="background-image: url({% static 'img/30.jpg' %});">
+      <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <img src="{{course.image}}" alt="{{course.name}}" class="img-fluid">
+          <br>
+  
+  
+        </div>
+        <div class="col-md-8">
+          <h3 class="text-center">
+              
+          </h3>
+          <p>Description:{{course.description}}</p>
+          <br>
+          <h5>Site:{{course.site}}</h5>
+          <h5>Level:{{course.type}}</h5>
+          <h5>Rating:{{average}}/10</h5>
+          <h5>Price:{{course.price}} ₹</h5>
+          <br>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <span class="heading">User Rating</span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star"></span>
+  <p>4.1 average based on 254 reviews.</p>
+  <hr style="border:3px solid #f1f1f1">
+  
+  <div class="row1">
+    <div class="side">
+      <div>5 star</div>
+    </div>
+    <div class="middle">
+      <div class="bar-container">
+        <div class="bar-5"></div>
+      </div>
+    </div>
+    <div class="side right">
+      <div>150</div>
+    </div>
+    <div class="side">
+      <div>4 star</div>
+    </div>
+    <div class="middle">
+      <div class="bar-container">
+        <div class="bar-4"></div>
+      </div>
+    </div>
+    <div class="side right">
+      <div>63</div>
+    </div>
+    <div class="side">
+      <div>3 star</div>
+    </div>
+    <div class="middle">
+      <div class="bar-container">
+        <div class="bar-3"></div>
+      </div>
+    </div>
+    <div class="side right">
+      <div>15</div>
+    </div>
+    <div class="side">
+      <div>2 star</div>
+    </div>
+    <div class="middle">
+      <div class="bar-container">
+        <div class="bar-2"></div>
+      </div>
+    </div>
+    <div class="side right">
+      <div>6</div>
+    </div>
+    <div class="side">
+      <div>1 star</div>
+    </div>
+    <div class="middle">
+      <div class="bar-container">
+        <div class="bar-1"></div>
+      </div>
+    </div>
+    <div class="side right">
+      <div>20</div>
+    </div>
+  </div>
+  
+          {% if request.user.is_authenticated %}
+            {% if request.user.is_superuser %}
+                <a href="{% url 'main:edit_courses' course.id %}" class="btn btn-warning">Edit Course</a>
+                <a href="{% url 'main:delete_courses' course.id %}" class="btn btn-danger">Delete Course</a>
+  
+            {% endif %}
+          {% endif %}
+        </div>
+  
+      </div>
+      </div>
+  
+    </div>
+    <br>
+    <div class="card1">
+      <div class="card-body">
+        <h3 class="text-center">Add Reviews</h3>
+        <form class="" action="{% url 'main:add_review' course.id %}" method="POST">
+          {% csrf_token %}
+          <label for="comment">Review</label>
+          <textarea name="comment" id="comment" rows="5" cols="30" class="form-control"></textarea>
+  
+          <label for="rating">Rating</label>
+          <input type="range" id="rangeInput"
+              name="rating" min="0" max="10" value="0" step="0.5"
+              oninput="amount.value=rangeInput.value">
+        <output name="amount" id="amount" for="rangeInput">0</output>
+          <br>
+          <input type="submit" class="btn btn-danger" name="" value="Add Review">
+  
+        </form>
+      </div>
+  
+    </div>
+    <br>
+  <div class="card1">
+    <div class="card-body">
+      <h3 class="text-center">Reviews</h3>
+      {% for review in reviews %}
+      <div class="card1" >
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <h5 class="text-left">{{review.user.username}}</h5>
+              <h5>{{review.rating}}  ★</h5>
+              {% if request.user == review.user %}
+              <a href="{% url 'main:edit_review' course.id review.id %}">Edit</a>
+              <a href="{% url 'main:delete_review' course.id review.id %}">Delete </a>
+              {% endif %}
+            </div>
+            <div class="col-md-9">
+              <p>{{review.comment}}</p>
+            </div>
+          </div>
+        </div>
+        <br>
+        {% endfor %}
+      </div>
+    </div>
+  
+  </div>
+  </div>
+</body>
+
+{% endblock %}
