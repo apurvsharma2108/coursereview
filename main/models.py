@@ -20,11 +20,14 @@ class Course(models.Model):
     def __unicode__(self):
         return self.name
 
-class Review(models.Model):
+class Review(models.Model):                                                                                             
     course=models.ForeignKey(Course,on_delete=models.CASCADE)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     comment=models.TextField(max_length=1000)
+    create_at=models.DateTimeField(auto_now_add=True)
+    update_at=models.DateTimeField(auto_now=True)
     rating=models.FloatField(default=0)
+
 
     def __str__(self):
         return self.user.username

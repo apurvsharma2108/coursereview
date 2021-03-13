@@ -5,7 +5,7 @@
 
 
 <body >   
-  <div class="container" style="background-image: url({% static 'img/28.jpg' %});" >
+  <div class="container">
     <br>
     <div class="card" style="background-image: url({% static 'img/30.jpg' %});">
       <div class="card-body">
@@ -116,8 +116,8 @@
         <form class="" action="{% url 'main:add_review' course.id %}" method="POST">
           {% csrf_token %}
           <label for="comment">Review</label>
-          <textarea name="comment" id="comment" rows="5" cols="30" class="form-control"></textarea>
-  
+          <textarea name="comment" id="comment" rows="5" cols="30" class="form-control" placeholder="Your Review"></textarea>
+          <br>
           <label for="rating">Rating</label>
           <input type="range" id="rangeInput"
               name="rating" min="0" max="10" value="0" step="0.5"
@@ -128,7 +128,7 @@
   
         </form>
       </div>
-  
+
     </div>
     <br>
   <div class="card1">
@@ -138,8 +138,8 @@
       <div class="card1" >
         <div class="card-body">
           <div class="row">
-            <div class="col-md-4">
-              <h5 class="text-left">{{review.user.username}}</h5>
+            <div class="col-md-3">
+              <h5 class="text-left">{{review.user.first_name}}</h5>
               <h5>{{review.rating}}  ★</h5>
               {% if request.user == review.user %}
               <a href="{% url 'main:edit_review' course.id review.id %}">Edit</a>
@@ -147,7 +147,7 @@
               {% endif %}
             </div>
             <div class="col-md-9">
-              <p>{{review.comment}}</p>
+              <p style="font-size: 20px;">{{review.comment}}</p>
             </div>
           </div>
         </div>
