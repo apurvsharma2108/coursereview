@@ -5,7 +5,7 @@ class Course(models.Model):
     name=models.CharField(max_length=500)
     site=models.CharField(max_length=500)
     type=models.CharField(max_length=500)#intermediate high or low #1
-    price=models.FloatField()#2
+    price=models.FloatField(default=False)#2
     description=models.TextField(max_length=5000)
     realse_Date=models.DateField()#3
     AverageRating=models.FloatField(default=False)

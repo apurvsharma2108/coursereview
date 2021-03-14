@@ -5,7 +5,7 @@
 
 
 <body >   
-  <div class="container">
+  <div class="container" style="background-color:white;">
     <br>
     <div class="card" style="background-image: url({% static 'img/30.jpg' %});">
       <div class="card-body">
@@ -20,13 +20,15 @@
           <h3 class="text-center">
               
           </h3>
-          <p>Description:{{course.description}}</p>
+          <div class="container">
+            <p><b>Description : </b>{{course.description}}</p>
           <br>
-          <h5>Site:{{course.site}}</h5>
-          <h5>Level:{{course.type}}</h5>
-          <h5>Rating:{{average}}/10</h5>
-          <h5>Price:{{course.price}} ₹</h5>
+          <h5><b>Site : </b>{{course.site}}</h5>
+          <h5><b>Level : </b>{{course.type}}</h5>
+          <h5><b>Rating : </b>{{average}} <span class="fa fa-star checked"></span>/10  </h5>
+          <h5><b>Price : </b>{{course.price}} ₹</h5>
           <br>
+          </div>
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
   <span class="heading">User Rating</span>
@@ -112,7 +114,7 @@
     <br>
     <div class="card1">
       <div class="card-body">
-        <h3 class="text-center">Add Reviews</h3>
+        <h3 class="text-center"><b>Add Reviews</b></h3>
         <form class="" action="{% url 'main:add_review' course.id %}" method="POST">
           {% csrf_token %}
           <label for="comment">Review</label>
@@ -133,18 +135,19 @@
     <br>
   <div class="card1">
     <div class="card-body">
-      <h3 class="text-center">Reviews</h3>
+      <h3 class="text-center"><b>Reviews</b></h3>
       {% for review in reviews %}
       <div class="card1" >
         <div class="card-body">
           <div class="row">
             <div class="col-md-3">
-              <h5 class="text-left">{{review.user.first_name}}</h5>
-              <h5>{{review.rating}}  ★</h5>
-              {% if request.user == review.user %}
-              <a href="{% url 'main:edit_review' course.id review.id %}">Edit</a>
-              <a href="{% url 'main:delete_review' course.id review.id %}">Delete </a>
-              {% endif %}
+              <h5 class="text-left"><b>{{review.user.first_name}}</b></h5>
+              <h5>{{review.rating}}<span class="fa fa-star checked"></span></h5>
+              <h5 class="text-center">
+                {% if request.user == review.user %}
+                <a href="{% url 'main:edit_review' course.id review.id %}">Edit</a>
+                <a href="{% url 'main:delete_review' course.id review.id %}">Delete </a>
+                {% endif %}</h5>
             </div>
             <div class="col-md-9">
               <p style="font-size: 20px;">{{review.comment}}</p>
