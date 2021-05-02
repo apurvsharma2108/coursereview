@@ -1,7 +1,8 @@
-
+from django.contrib import admin
+from main import views 
 from django.urls import path
 from . import views
-
+from django.conf.urls import url
 app_name="main"
 
 urlpatterns = [
@@ -13,6 +14,8 @@ urlpatterns = [
     path('addreview/<int:id>/',views.add_review,name="add_review"),
     path('editreview/<int:course_id>/<int:review_id>/',views.edit_review,name="edit_review"),
     path('comparecourses/',views.compare_courses,name="compare_courses"),
-    path('deletereview/<int:course_id>/<int:review_id>/',views.delete_review,name="delete_review")
+    path('deletereview/<int:course_id>/<int:review_id>/',views.delete_review,name="delete_review"),
+    path('export/', views.export),
+    path('upload/',views.simple_upload,name="simple_upload"),
 
 ]

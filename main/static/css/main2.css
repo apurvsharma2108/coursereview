@@ -1,0 +1,158 @@
+<style>
+      @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2:wght@500&display=swap');
+      
+      @import url('https://fonts.googleapis.com/css?family=Lato');
+      body {
+background-color: #ddd;
+font-family: "Open Sans";
+}
+table {
+border: 23px;
+border-collapse: collapse;
+}
+
+th, td {
+/* background-color: #fff;
+border: 15px solid #ddd; */
+border-bottom: none;
+border-top: none;
+text-align: left;
+padding: 15px 50px;
+font-size: 18px;
+display: table-cell;
+/* visibilty: visible; */
+opacity: 1;
+}
+
+th.hidden, td.hidden {
+display: none;
+visibility: hidden;
+opacity: 0;
+}
+
+th {
+font-size: 20px;
+}
+
+th::after, td::after {
+content: "";
+display: block;
+width: 100%;
+height: 2px;
+margin: 0 auto;
+background-color: #ddd;
+margin-top: 30px;
+}
+
+table th {
+padding-top: 35px;
+}
+table tr:last-child td {
+padding-bottom: 35px;
+}
+table tr:last-child td::after {
+display: none;
+}
+
+td ul {
+list-style: none;
+}
+td li {
+position: relative;
+margin-bottom: 10px;
+}
+
+td li.checked::before {
+content: "\f058";
+color: #80BB41;
+}
+
+td > strong {
+font-size: 20px;
+color:black;
+font-weight: 600;
+}
+
+.gps-subtle {
+opacity: 0.5;
+}
+.price {
+font-size: 22px;
+}
+.price.empty {
+opacity: .35;
+}
+button {
+    padding: 0px 20px;
+    padding-top: 3px;
+    color: white;
+    border: 2px solid black;
+    border-radius: 6px;
+    font-family: var(--font1);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    cursor: pointer;
+}
+button:hover+.design-container,
+button:active+.design-container,
+button:focus+.design-container {
+
+color:black;
+
+}
+
+button:hover,
+button:focus {
+background-color:black;
+border-color: currentColor;
+}
+
+button:active {
+transform: translate(2px);
+}
+.text-center {
+text-align: center;
+}
+
+img.product {
+  height: 10vw;
+    display: block;
+
+    margin-left: auto;
+    margin-right: auto;
+    width: 10vw;
+    object-fit: cover;
+}
+
+ul.product-list {
+list-style: none;
+margin: 0 0 50px;
+}
+
+.product-list li {
+font-size: 20px;
+margin-bottom: 10px;
+}
+
+.relative {
+position: relative;
+}
+i[class^="fa"] {
+font-style: normal;
+}
+
+
+a, a:visited {
+color: blue;
+}
+
+a.table-shown {
+color: #777;
+}
+
+
+
+
+</style>

@@ -3,6 +3,11 @@ from django.http import HttpResponse
 from .models import *
 from .forms import *
 from django.db.models import Avg
+from .models import Course
+from django.contrib import messages
+from .resources import CourseResource
+from tablib import Dataset
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 # Create your views here.
 def home(request):
     query=request.GET.get("title")
@@ -11,8 +16,20 @@ def home(request):
         allCourses=Course.objects.filter(name__icontains=query)
     else:
         allCourses=Course.objects.all()
+    
+    p=Paginator(allCourses,8)
+    page_num=request.GET.get('page',1)
+
+
+
+    try:
+        page=p.page(page_num)
+    except (EmptyPage , PageNotAnInteger,TypeError):                           #if you access a invalid page
+        page=p.page(1)
+
+
     context={
-        'courses':allCourses,
+        'courses':page,
     }
     
 
@@ -153,3 +170,38 @@ def delete_review(request,course_id,review_id):
         return redirect("main:detail",course_id)
     else:
         return redirect("acounts:login")
+
+
+def export(request):
+    course_resource = CourseResource()
+    dataset = course_resource.export()
+    response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="persons.xls"'
+    return response
+
+def simple_upload(request):
+    if request.method == 'POST':
+        course_resource = CourseResource()
+        dataset = Dataset()
+        new_persons = request.FILES['myfile']
+        imported_data = dataset.load(new_persons.read(),format='xlsx')
+        for data in imported_data:
+        	value = Course(
+        		data[0],
+        		data[1],
+        		data[2],
+        		data[3],
+                data[4],
+                data[5],
+                data[6],
+                data[7],
+                data[8],
+                data[9],
+                data[10],
+                data[11],
+                data[12],
+                data[13],
+                data[14],
+        		)
+        	value.save()     
+    return render(request,'upload.html')

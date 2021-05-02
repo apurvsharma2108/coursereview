@@ -13,7 +13,7 @@
         <div class="col-md-4">
           <img src="{{course.image}}" alt="{{course.name}}" class="img-fluid">
           <br>
-  
+
   
         </div>
         <div class="col-md-8">
@@ -21,11 +21,12 @@
               
           </h3>
           <div class="container">
+            <h3>{{course.name}}</h3>
             <p><b>Description : </b>{{course.description}}</p>
           <br>
           <h5><b>Site : </b>{{course.site}}</h5>
           <h5><b>Level : </b>{{course.type}}</h5>
-          <h5><b>Rating : </b>{{average}} <span class="fa fa-star checked"></span>/10  </h5>
+          <h5><b>Rating : </b>{{course.Rating}}/5 <span class="fa fa-star checked"></span> </h5>
           <h5><b>Price : </b>{{course.price}} ₹</h5>
           <br>
           </div>

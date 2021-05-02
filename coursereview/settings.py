@@ -58,7 +58,7 @@ ROOT_URLCONF = 'coursereview.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS':  [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,6 +74,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'coursereview.wsgi.application'
 
 
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
+)
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -124,7 +127,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-IMPORT_EXPORT_USE_TRANSACTIONS=True
+
+
 STATIC_URL = '/static/'
 MEDIA_URL='/img/'
 STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')

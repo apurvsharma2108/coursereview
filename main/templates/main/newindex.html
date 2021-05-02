@@ -10,162 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     {% load static %}
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2:wght@500&display=swap');
-      
-      @import url('https://fonts.googleapis.com/css?family=Lato');
-      body {
-background-color: #ddd;
-font-family: "Open Sans";
-}
-table {
-border: 23px;
-border-collapse: collapse;
-}
-
-th, td {
-/* background-color: #fff;
-border: 15px solid #ddd; */
-border-bottom: none;
-border-top: none;
-text-align: left;
-padding: 15px 50px;
-font-size: 18px;
-display: table-cell;
-/* visibilty: visible; */
-opacity: 1;
-}
-
-th.hidden, td.hidden {
-display: none;
-visibility: hidden;
-opacity: 0;
-}
-
-th {
-font-size: 20px;
-}
-
-th::after, td::after {
-content: "";
-display: block;
-width: 100%;
-height: 2px;
-margin: 0 auto;
-background-color: #ddd;
-margin-top: 30px;
-}
-
-table th {
-padding-top: 35px;
-}
-table tr:last-child td {
-padding-bottom: 35px;
-}
-table tr:last-child td::after {
-display: none;
-}
-
-td ul {
-list-style: none;
-}
-td li {
-position: relative;
-margin-bottom: 10px;
-}
-
-td li.checked::before {
-content: "\f058";
-color: #80BB41;
-}
-
-td > strong {
-font-size: 20px;
-color:black;
-font-weight: 600;
-}
-
-.gps-subtle {
-opacity: 0.5;
-}
-.price {
-font-size: 22px;
-}
-.price.empty {
-opacity: .35;
-}
-button {
-font-family: inherit;
-font-weight: bold;
-color: white;
-margin-top: 23px;
-letter-spacing: 2px;
-
-padding: 9px 20px;
-border: 1px solid var(--grey);
-border-radius: 1000px;
-background: radial-gradient(black, transparent);
-transition: .3s;
-
-cursor: pointer;
-}
-button:hover+.design-container,
-button:active+.design-container,
-button:focus+.design-container {
---tr: 20;
---op: .7;
-}
-
-button:hover,
-button:focus {
-color: var(--primary);
-background: hsla(var(--hue), 25%, 10%, .2);
-border-color: currentColor;
-}
-
-button:active {
-transform: translate(2px);
-}
-.text-center {
-text-align: center;
-}
-
-img.product {
-max-width: 175px;
-margin: 15px auto 0;
-}
-
-ul.product-list {
-list-style: none;
-margin: 0 0 50px;
-}
-
-.product-list li {
-font-size: 20px;
-margin-bottom: 10px;
-}
-
-.relative {
-position: relative;
-}
-i[class^="fa"] {
-font-style: normal;
-}
-
-
-a, a:visited {
-color: blue;
-}
-
-a.table-shown {
-color: #777;
-}
-
-
-
-
-    </style>
-      
+    <link rel="stylesheet" href="{% static 'css/main2.css' %}">      
     <title>Feedback Page!</title>
 
   </head>
@@ -234,9 +79,13 @@ color: #777;
               <div class="close relative"><a href="{% url 'main:detail' course.id %}" class="close"><i class="fa-window-close"></i></a></div>
               <!-- <div class="container"> -->
             {{course.name}}
+            <br>
+            <br>
           <!-- </div> -->
               
-              <div class="text-center"><img class="product" src="{{course.image}}" /></div>
+              <div class="container">
+                <div class="text-center"><img class="product" src="{{course.image}}" /></div>
+              </div>
           </th>
       {% endfor %}
     </tr>
@@ -275,6 +124,7 @@ color: #777;
               <strong>Pricing</strong><br/>
               <span class="gps-subtle">Starting from</span><br/>
               <span class="price"><strong>{{course.price}} ₹</strong>/month</span>
+             <br>
              <br>
              <div class="card-back">
               <button onclick="window.location.href='{% url 'main:detail' course.id %}';">
