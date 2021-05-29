@@ -17,5 +17,6 @@ urlpatterns = [
     path('deletereview/<int:course_id>/<int:review_id>/',views.delete_review,name="delete_review"),
     path('export/', views.export),
     path('upload/',views.simple_upload,name="simple_upload"),
-
+    path('input/',views.ipt,name="ipt"),
+    path('result/',views.reco,name="result")
 ]

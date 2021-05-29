@@ -1,0 +1,26 @@
+.contact-content {
+    height: 395px;
+    height: 80vh;
+    background-color: rgb(219, 202, 186);
+    display: flex;
+    margin-top: 32px;
+    position: relative;
+    padding: 9px;
+    background-image: url('../img/35.jpg');
+}
+
+.contact-content::after {
+    content: "";
+    /* background-image: url("../img/14.jpg"); */
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: inherit;
+    opacity: 0.15;
+    border-radius: 12px;
+    z-index: -1;
+}
+
+#textarea {
+    height: 200px;
+}

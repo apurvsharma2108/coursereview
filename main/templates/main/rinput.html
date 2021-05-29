@@ -1,0 +1,145 @@
+
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!--Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/r.css' %}">      
+    <title>Feedback Page!</title>
+
+  </head>
+  <body style="background-image: url({% static 'img/30.jpg' %});">
+      <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white "> -->
+      <nav class="navbar navbar-expand-lg navbar-light text-white" id="navbar" style=" padding-right: 140px; padding-left: 140px; margin-top: -20px; font-size: 23px; font-family: 'Baloo Bhaina 2', cursive; ">
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right: -80px;margin-left:-95px;margin-top: 12px;" >
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'main:home' %}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <!-- <li class="nav-item active">
+          <a class="nav-link" href="{% url 'main:compare_courses' %}">Compare Courses <span class="sr-only">(current)</span></a>
+        </li> -->
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'main:add_courses' %}">Add Reviews!</a>
+        </li>
+
+        {% if user.is_authenticated %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{user.username}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">My Profile</a>
+            <a class="dropdown-item" href="{% url 'acounts:logout' %}">Logout</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Reccomender!</a>
+          </div>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'acounts:login' %}">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'acounts:register' %}">Sign Up</a>
+        </li>
+        {% endif %}
+      </ul>
+      <br>
+      <a class="navbar-brand" href="{% url 'main:home' %}">
+        <img src="{% static 'img/finalcourselogo.png' %}" alt=""
+        style=" margin-left: 110px;"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <br>
+      <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'main:compare_courses' %}">
+        <input class="form-control mr-sm-2" type="search" placeholder="Enter A course " aria-label="Search" name="title" style="margin-left:212px;">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"  >Compare Courses</button>
+
+      </form>
+    </div>
+    
+  </nav>
+
+
+      {% block content %}
+      
+        <!-- <form action="{% url 'main:result' %}" method="get">
+        {% csrf_token %}
+    
+            Enter A course : <input type="text" required name="CO">  <br> <br>
+            <input type="submit" value="submit">
+        </form>  -->
+        <form action="{% url 'main:result' %}" method="get">
+            <div class="background">
+                <div class="container">
+                  <div class="screen">
+                    <div class="screen-header">
+                      <div class="screen-header-left">
+                        <div class="screen-header-button close"></div>
+                        <div class="screen-header-button maximize"></div>
+                        <div class="screen-header-button minimize"></div>
+                      </div>
+                      <div class="screen-header-right">
+                        <div class="screen-header-ellipsis"></div>
+                        <div class="screen-header-ellipsis"></div>
+                        <div class="screen-header-ellipsis"></div>
+                      </div>
+                    </div>
+                    <div class="screen-body">
+                      <div class="screen-body-item left">
+                        <div class="app-title">
+                          <span>SELECT A</span>
+                          <span>COURSE</span>
+                        </div>
+                        <div class="app-contact">We Recommend you the best course</div>
+                      </div>
+                      <div class="screen-body-item">
+                        <div class="app-form">
+                          <div class="app-form-group">
+                            <input class="app-form-control" type="text" required name="CO" placeholder="Enter Course Name" >
+                          </div>
+                          <div class="app-form-group">
+                            <input class="app-form-control" placeholder="Enter Site">
+                          </div>
+                          <div class="app-form-group">
+                            <input class="app-form-control" placeholder="Enter Course Type">
+                          </div>
+                          <div class="app-form-group message">
+                            <input class="app-form-control" placeholder="Enter Difficulty Level">
+                          </div>
+                          <div class="app-form-group buttons">
+                            <button class="app-form-button">CANCEL</button>
+                            <button class="app-form-button" type="submit" value="submit">SEND</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+        </form>
+          
+        
+
+      {% endblock %}
+
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    </div>
+  </body>
+</html>

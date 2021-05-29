@@ -8,6 +8,13 @@ from django.contrib import messages
 from .resources import CourseResource
 from tablib import Dataset
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from django.http import HttpResponse
+from django.shortcuts import render 
+import pandas as pd
+import numpy as np
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
 # Create your views here.
 def home(request):
     query=request.GET.get("title")
@@ -178,6 +185,92 @@ def export(request):
     response = HttpResponse(dataset.xls, content_type='application/vnd.ms-excel')
     response['Content-Disposition'] = 'attachment; filename="persons.xls"'
     return response
+
+def ipt(request):
+    return render(request,"main/rinput.html")
+
+def reco(request):
+    lis=[]
+    lis.append(request.GET['CO'])
+
+    print(lis)
+
+    df = pd.read_csv("complete_course_data.csv")
+
+    features = ["course_title","platform","level"]
+
+    def combine_features(row):
+        return row['course_title']+" "+row['platform']+" "+row['level']
+
+
+    for feature in features:
+        df[feature] = df[feature].fillna('') #filling all NaNs with blank string
+
+
+    df["combined_features"] = df.apply(combine_features,axis=1)
+#applying combined_features() method over each rows of dataframe and storing the combined string in "combined_features" column
+
+
+    cv = CountVectorizer() #creating new CountVectorizer() object
+    count_matrix = cv.fit_transform(df["combined_features"]) #feeding combined strings(course contents) to CountVectorizer() object
+
+    cosine_sim = cosine_similarity(count_matrix) #cosine similarity matrix for count matrix
+
+    def get_title_from_index(index):
+        return df[df.index == index]["course_title"].values[0]
+    def get_index_from_title(title):
+        return df[df.course_title == title]["index"].values[0]
+
+    
+
+    course_user_likes =lis[0]  # here take the inputs of user
+    course_index = get_index_from_title(course_user_likes)
+    similar_courses = list(enumerate(cosine_sim[course_index])) #accessing the row corresponding to given course to find all the similarity scores for that course and then enumerating over it
+
+
+    sorted_similar_courses = sorted(similar_courses,key=lambda x:x[1],reverse=True)[1:]
+
+    res=[]
+    i=0
+    print("Top 5 similar courses to "+course_user_likes+" are:\n")
+    for element in sorted_similar_courses:
+        print(get_title_from_index(element[0]))
+        res.append(get_title_from_index(element[0]))
+        i=i+1
+        if i>5:
+            break
+
+    ans=res[1:6]
+    return render(request,"main/result.html",{'ans':ans})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def simple_upload(request):
     if request.method == 'POST':

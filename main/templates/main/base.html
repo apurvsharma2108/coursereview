@@ -23,7 +23,7 @@
       <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white "> -->
       <nav class="navbar navbar-expand-lg navbar-light text-white" id="navbar" style="  padding-right: 140px; padding-left: 140px; font-size: 23px; font-family: 'Baloo Bhaina 2', cursive; ">
     
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right: -60px;margin-left:-25px;" >
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right: -80px;margin-left:-105px;" >
       <ul class="navbar-nav mr-auto">
         
         <li class="nav-item active">
@@ -49,6 +49,9 @@
           </div>
         </li>
         {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'main:ipt'%}">Recommendations</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'acounts:login' %}"> Login</a>
         </li>
